@@ -1,0 +1,18 @@
+* initial area and player movement 
+
+display initial game area
+display player bottom corner
+display destination object
+move player right
+move player horizontal
+message if player hits edge
+show keys option
+move player vertical
+end game with message if arrive at destination
+
+* basic game definition (size, end criteria)
+* a moving actor
+* a solid object (cannot be moved onto)
+* an attribute
+* attribute changed by moving onto object
+* doorway to another room
