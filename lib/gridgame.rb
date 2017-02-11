@@ -6,7 +6,7 @@ class Gridgame
   end
 
   def start
-    @console.output ['.....', '.....', '.....']
+    @console.output ['.....', '.....', '@....']
     @console.input {
     }
   end
