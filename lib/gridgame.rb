@@ -29,8 +29,11 @@ class Gridgame
   end
 
   def handle_move_key(c)
-    moved = if c == 'r'
-              @game_area.right(@player)
+    commands_by_key = {
+      'r' => :right
+    }
+    moved = if commands_by_key.has_key?(c)
+              @game_area.send(commands_by_key[c], @player)
             elsif c == 'l'
               @game_area.left(@player)
             elsif c == 'u'
