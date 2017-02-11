@@ -5,7 +5,7 @@ require_relative 'player'
 require_relative 'game_area'
 
 class Gridgame
-  ROWS= 3
+  ROWS = 3
   def initialize(console = Console.new)
     @console = console
     @message = ''
@@ -29,19 +29,9 @@ class Gridgame
   end
 
   def handle_move_key(c)
-    commands_by_key = {
-      'r' => :right
-    }
-    moved = if commands_by_key.has_key?(c)
-              @game_area.send(commands_by_key[c], @player)
-            elsif c == 'l'
-              @game_area.left(@player)
-            elsif c == 'u'
-              @game_area.up(@player)
-            elsif c == 'd'
-              @game_area.down(@player)
-            end
-    check_moved moved
+    if commands_by_key.has_key?(c)
+      check_moved @game_area.send(commands_by_key[c], @player)
+    end
   end
 
   def check_moved(moved)
@@ -49,6 +39,15 @@ class Gridgame
   end
 
   private
+
+  def commands_by_key
+  {
+    'l' => :left,
+    'r' => :right,
+    'd' => :down,
+    'u' => :up
+  }
+  end
 
   def do_display
     @console.output @game_area.rows.map(&:to_s) + [@message, keys]
@@ -59,6 +58,6 @@ class Gridgame
   end
 
   def keys
-    'Move: lru, Quit: q'
+    "Move: #{commands_by_key.keys.join ''}, Quit: q"
   end
 end
