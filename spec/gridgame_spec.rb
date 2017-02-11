@@ -58,7 +58,13 @@ describe 'gridgame' do
 
   it 'does not allow movement off right edge' do
     console.right.right.right.right.right
-    expect(console.last_screen[2]).to eq '....@'
+    expect(console.game_area.last).to eq '....@'
+    expect(console.messages.first).to eq 'Cannot move there'
+  end
+
+  it 'does not allow movement off top edge' do
+    console.up.up.up.up
+    expect(console.game_area.first).to eq '@..X.'
     expect(console.messages.first).to eq 'Cannot move there'
   end
 

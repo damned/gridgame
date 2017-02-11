@@ -21,7 +21,7 @@ class Gridgame
         check_moved(@player.left)
       elsif c == 'u'
         @rows[@player.y].remove(@player)
-        @player.up
+        check_moved(@player.up)
         @rows[@player.y].add(@player)
       elsif c == 'q'
         quit

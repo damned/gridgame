@@ -1,6 +1,7 @@
 class Player
   MIN_X = 0
   MAX_X = 4
+  MIN_Y = 0
 
   attr_reader :x, :y
   def initialize(x, y)
@@ -17,6 +18,7 @@ class Player
     @x += 1
   end
   def up
+    return false if @y == MIN_Y
     @y -= 1
   end
   def to_s
