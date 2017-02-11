@@ -52,6 +52,11 @@ class TestConsole
     self
   end
 
+  def down
+    simulate_input 'd'
+    self
+  end
+
   def released
     @released
   end

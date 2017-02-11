@@ -25,4 +25,11 @@ class GameArea
     @rows[actor.y].add(actor)
     result
   end
+
+  def down(actor)
+    @rows[actor.y].remove(actor)
+    result = actor.down
+    @rows[actor.y].add(actor)
+    result
+  end
 end

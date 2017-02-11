@@ -25,6 +25,8 @@ class Gridgame
         check_moved @game_area.left(@player)
       elsif c == 'u'
         check_moved @game_area.up(@player)
+      elsif c == 'd'
+        check_moved @game_area.down(@player)
       elsif c == 'q'
         quit
       end

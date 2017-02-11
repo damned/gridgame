@@ -43,6 +43,13 @@ describe 'gridgame' do
                                      '.....']
   end
 
+  it 'can move player down' do
+    console.up.up.right.simulate_input 'd'
+    expect(console.game_area).to eq ['...X.',
+                                     '.@...',
+                                     '.....']
+  end
+
   it 'can move player up into destination row' do
     console.up.up
     expect(console.game_area).to eq ['@..X.',
@@ -65,6 +72,12 @@ describe 'gridgame' do
   it 'does not allow movement off top edge' do
     console.up.up.up.up
     expect(console.game_area.first).to eq '@..X.'
+    expect(console.messages.first).to eq 'Cannot move there'
+  end
+
+  it 'does not allow movement off bottom edge' do
+    console.down
+    expect(console.game_area.last).to eq '@....'
     expect(console.messages.first).to eq 'Cannot move there'
   end
 
