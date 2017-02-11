@@ -13,15 +13,18 @@ class EmptyRow
 end
 
 class PlayerRow
+  MIN_X = 0
+  MAX_X = 4
   def initialize
-    @player_x = 0
+    @player_x = MIN_X
   end
   def left
-    return false if @player_x == 0
+    return false if @player_x == MIN_X
     @player_x -= 1
     true
   end
   def right
+    return false if @player_x == MAX_X
     @player_x += 1
   end
   def to_s
@@ -42,12 +45,16 @@ class Gridgame
     do_display
     @console.input {|c|
       if c == 'r'
-        player_row.right
+        check_moved(player_row.right)
       elsif c == 'l'
-        @message = 'Cannot move there' unless player_row.left
+        check_moved(player_row.left)
       end
       do_display
     }
+  end
+
+  def check_moved(moved)
+    @message = 'Cannot move there' unless moved
   end
 
   private
