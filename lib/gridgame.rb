@@ -1,9 +1,13 @@
+require_relative 'console'
+
 class Gridgame
-  def initialize(console)
+  def initialize(console = Console.new)
     @console = console
   end
 
   def start
-    @console.update ['.....', '.....', '.....']
+    @console.output ['.....', '.....', '.....']
+    @console.input {
+    }
   end
 end

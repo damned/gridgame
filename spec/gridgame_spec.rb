@@ -2,12 +2,16 @@ require 'rspec'
 require 'gridgame'
 
 class TestConsole
-  def update(screen_lines)
+  def output(screen_lines)
     @screen = screen_lines
   end
 
   def last_screen
     @screen
+  end
+
+  def input
+
   end
 end
 

@@ -1,6 +1,6 @@
 * initial area and player movement 
 
-display initial game area
+X display initial game area
 display player bottom corner
 display destination object
 move player right
