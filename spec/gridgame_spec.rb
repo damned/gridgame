@@ -63,15 +63,15 @@ describe 'gridgame' do
 
   it 'starts by displaying a small default game area with player and destination on it' do
     expect(console.game_area).to eq ['...X.',
-                                       '.....', 
-                                       '@....']
+                                     '.....',
+                                     '@....']
   end
 
   it "moves player right if hit 'r'" do
     console.simulate_input 'r'
     expect(console.game_area).to eq ['...X.',
-                                       '.....',
-                                       '.@...']
+                                     '.....',
+                                     '.@...']
   end
 
   it "does not move player right if hit key other than 'r'" do
@@ -84,9 +84,16 @@ describe 'gridgame' do
     expect(console.game_area.last).to eq '...@.'
   end
 
-  it 'can move player left too' do
-    console.right.right.left
+  it 'can move player left' do
+    console.right.right.simulate_input 'l'
     expect(console.game_area.last).to eq '.@...'
+  end
+
+  it 'can move player up' do
+    console.simulate_input 'u'
+    expect(console.game_area).to eq ['...X.',
+                                     '@....',
+                                     '.....']
   end
 
   it 'does not allow movement off left edge' do
