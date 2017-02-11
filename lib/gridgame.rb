@@ -7,10 +7,8 @@ class Gridgame
   def initialize(console = Console.new)
     @console = console
     @message = ''
-    @player_row_index = 2
-    @player = Player.new
-    @player_row = Row.new @player
-    update_rows
+    @player = Player.new 0, 2
+    @rows = [Row.new(Destination.new), Row.new, Row.new(@player)]
   end
 
   def start
@@ -22,8 +20,9 @@ class Gridgame
       elsif c == 'l'
         check_moved(@player.left)
       elsif c == 'u'
-        @player_row_index -= 1
-        update_rows
+        @rows[@player.y].remove(@player)
+        @player.up
+        @rows[@player.y].add(@player)
       elsif c == 'q'
         quit
       end
@@ -45,11 +44,6 @@ class Gridgame
     @rows.map(&:to_s)
   end
 
-  def update_rows
-    @rows = [Row.new(Destination.new), Row.new, Row.new]
-    @rows[@player_row_index] = @player_row
-  end
-
   def player_row
     @player_row
   end
@@ -59,6 +53,6 @@ class Gridgame
   end
 
   def keys
-    'Move: lr, Quit: q'
+    'Move: lru, Quit: q'
   end
 end

@@ -1,20 +1,23 @@
 class Player
   MIN_X = 0
   MAX_X = 4
-  def initialize
-    @player_x = MIN_X
+
+  attr_reader :x, :y
+  def initialize(x, y)
+    @x = x
+    @y = y
   end
   def left
-    return false if @player_x == MIN_X
-    @player_x -= 1
+    return false if @x == MIN_X
+    @x -= 1
     true
   end
   def right
-    return false if @player_x == MAX_X
-    @player_x += 1
+    return false if @x == MAX_X
+    @x += 1
   end
-  def x
-    @player_x
+  def up
+    @y -= 1
   end
   def to_s
     '@'

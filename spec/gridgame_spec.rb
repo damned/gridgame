@@ -43,7 +43,7 @@ describe 'gridgame' do
                                      '.....']
   end
 
-  xit 'can move player up into destination row' do
+  it 'can move player up into destination row' do
     console.up.up
     expect(console.game_area).to eq ['@..X.',
                                      '.....',
