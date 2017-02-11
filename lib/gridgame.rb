@@ -32,23 +32,29 @@ end
 class Gridgame
   def initialize(console = Console.new)
     @console = console
+    @message = ''
+    @rows = [DestinationRow.new, EmptyRow.new, PlayerRow.new]
   end
 
   def start
-    rows = [DestinationRow.new, EmptyRow.new, PlayerRow.new]
-    do_display(rows)
+    do_display
     @console.input {|c|
-      player_row = rows.last
       if c == 'r'
         player_row.right
       elsif c == 'l'
         player_row.left
       end
-      do_display(rows)
+      do_display
     }
   end
 
-  def do_display(rows)
-    @console.output rows.map(&:to_s)
+  private
+
+  def do_display
+    @console.output @rows.map(&:to_s) + [@message]
+  end
+
+  def player_row
+    @rows.last
   end
 end
