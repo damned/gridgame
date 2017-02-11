@@ -3,6 +3,10 @@ require 'gridgame'
 
 class TestConsole
 
+  def initialize
+    @released = false
+  end
+
   # quack like a Console
 
   def output(screen_lines)
@@ -11,6 +15,10 @@ class TestConsole
 
   def input(&handler)
     @input_handler = handler
+  end
+
+  def release
+    @released = true
   end
 
   # test api
@@ -27,9 +35,14 @@ class TestConsole
     simulate_input 'r'
     self
   end
+
   def left
     simulate_input 'l'
     self
+  end
+
+  def released
+    @released
   end
 end
 
@@ -85,4 +98,8 @@ describe 'gridgame' do
     expect(console.last_screen.last).to eq ''
   end
 
+  it "will exit on 'q'" do
+    console.simulate_input 'q'
+    expect(console.released).to eq true
+  end
 end

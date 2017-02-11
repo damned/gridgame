@@ -49,6 +49,8 @@ class Gridgame
         check_moved(player_row.right)
       elsif c == 'l'
         check_moved(player_row.left)
+      elsif c == 'q'
+        quit
       end
       do_display
     }
@@ -70,5 +72,9 @@ class Gridgame
 
   def player_row
     @rows.last
+  end
+
+  def quit
+    @console.release
   end
 end
