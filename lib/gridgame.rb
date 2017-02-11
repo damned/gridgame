@@ -1,49 +1,7 @@
 require_relative 'console'
-
-class Row
-  def initialize(*actors)
-    @actors = actors
-  end
-  def to_s
-    row = '.....'
-    @actors.each {|actor|
-      row[actor.x] = actor.to_s
-    }
-    row
-  end
-end
-
-class Destination
-  def x
-    3
-  end
-  def to_s
-    'X'
-  end
-end
-
-class Player
-  MIN_X = 0
-  MAX_X = 4
-  def initialize
-    @player_x = MIN_X
-  end
-  def left
-    return false if @player_x == MIN_X
-    @player_x -= 1
-    true
-  end
-  def right
-    return false if @player_x == MAX_X
-    @player_x += 1
-  end
-  def x
-    @player_x
-  end
-  def to_s
-    '@'
-  end
-end
+require_relative 'row'
+require_relative 'destination'
+require_relative 'player'
 
 class Gridgame
   def initialize(console = Console.new)
