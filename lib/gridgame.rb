@@ -6,9 +6,13 @@ class Gridgame
   end
 
   def start
-    @console.output ['.....', '.....', '@....']
-    @console.input {
-      @console.output ['.....', '.....', '.@...']
+    do_display('@....')
+    @console.input {|c|
+      do_display('.@...') if c == 'r'
     }
+  end
+
+  def do_display(last_row)
+    @console.output ['.....', '.....', last_row]
   end
 end

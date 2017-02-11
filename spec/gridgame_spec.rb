@@ -39,4 +39,10 @@ describe 'gridgame' do
                                        '.@...']
   end
 
+  it "does not move player right if hit key other than 'r'" do
+    game.start
+    console.simulate_input 'j'
+    expect(console.last_screen.last).to eq '@....'
+  end
+
 end
