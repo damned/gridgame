@@ -7,27 +7,18 @@ class Row
   def to_s
     row = '.....'
     @actors.each {|actor|
-      row[actor.x] = actor.actor_to_s
+      row[actor.x] = actor.to_s
     }
     row
   end
 end
 
-class DestinationRow < Row
-  def initialize
-    super self
-  end
+class Destination
   def x
     3
   end
-  def actor_to_s
-    'X'
-  end
-end
-
-class EmptyRow < Row
   def to_s
-    '.....'
+    'X'
   end
 end
 
@@ -49,7 +40,7 @@ class Player
   def x
     @player_x
   end
-  def actor_to_s
+  def to_s
     '@'
   end
 end
@@ -97,7 +88,7 @@ class Gridgame
   end
 
   def update_rows
-    @rows = [DestinationRow.new, EmptyRow.new, EmptyRow.new]
+    @rows = [Row.new(Destination.new), Row.new, Row.new]
     @rows[@player_row_index] = @player_row
   end
 
