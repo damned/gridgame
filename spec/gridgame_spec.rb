@@ -62,9 +62,15 @@ describe 'gridgame' do
     expect(console.last_screen[2]).to eq '...@.'
   end
 
-  it 'can moves player left too' do
+  it 'can move player left too' do
     console.right.right.left
     expect(console.last_screen[2]).to eq '.@...'
+  end
+
+  it 'does not allow movement off left edge' do
+    console.left
+    expect(console.last_screen[2]).to eq '@....'
+    expect(console.last_screen.last).to eq 'Cannot move there'
   end
 
 end

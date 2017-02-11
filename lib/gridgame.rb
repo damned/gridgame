@@ -17,7 +17,9 @@ class PlayerRow
     @player_x = 0
   end
   def left
+    return false if @player_x == 0
     @player_x -= 1
+    true
   end
   def right
     @player_x += 1
@@ -42,7 +44,7 @@ class Gridgame
       if c == 'r'
         player_row.right
       elsif c == 'l'
-        player_row.left
+        @message = 'Cannot move there' unless player_row.left
       end
       do_display
     }
