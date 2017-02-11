@@ -7,7 +7,7 @@ X display destination object
 X move player horizontal
 X message if player hits edge
 X show keys option
-move player vertical
+X move player vertical
 end game with message if arrive at destination
 
 * basic game definition (size, end criteria)

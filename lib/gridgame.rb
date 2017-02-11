@@ -19,19 +19,26 @@ class Gridgame
     do_display
     @console.input {|c|
       @message = ''
-      if c == 'r'
-        check_moved @game_area.right(@player)
-      elsif c == 'l'
-        check_moved @game_area.left(@player)
-      elsif c == 'u'
-        check_moved @game_area.up(@player)
-      elsif c == 'd'
-        check_moved @game_area.down(@player)
-      elsif c == 'q'
+      if c == 'q'
         quit
+      else
+        handle_move_key(c)
       end
       do_display
     }
+  end
+
+  def handle_move_key(c)
+    moved = if c == 'r'
+              @game_area.right(@player)
+            elsif c == 'l'
+              @game_area.left(@player)
+            elsif c == 'u'
+              @game_area.up(@player)
+            elsif c == 'd'
+              @game_area.down(@player)
+            end
+    check_moved moved
   end
 
   def check_moved(moved)
