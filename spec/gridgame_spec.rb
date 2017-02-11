@@ -35,15 +35,15 @@ describe 'gridgame' do
 
   before { game.start }
 
-  it 'starts by displaying a small default game area with player on it' do
-    expect(console.last_screen).to eq ['.....',
+  it 'starts by displaying a small default game area with player and destination on it' do
+    expect(console.last_screen).to eq ['...X.',
                                        '.....', 
                                        '@....']
   end
 
   it "moves player right if hit 'r'" do
     console.simulate_input 'r'
-    expect(console.last_screen).to eq ['.....',
+    expect(console.last_screen).to eq ['...X.',
                                        '.....',
                                        '.@...']
   end

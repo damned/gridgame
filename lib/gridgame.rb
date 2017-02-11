@@ -1,5 +1,17 @@
 require_relative 'console'
 
+class DestinationRow
+  def to_s
+    '...X.'
+  end
+end
+
+class EmptyRow
+  def to_s
+    '.....'
+  end
+end
+
 class PlayerRow
   def initialize
     @player_x = 0
@@ -20,17 +32,17 @@ class Gridgame
   end
 
   def start
-    last_row = PlayerRow.new
-    do_display(last_row.to_s)
+    rows = [DestinationRow.new, EmptyRow.new, PlayerRow.new]
+    do_display(rows)
     @console.input {|c|
       if c == 'r'
-        last_row.right
-        do_display(last_row.to_s)
+        rows.last.right
+        do_display(rows)
       end
     }
   end
 
-  def do_display(last_row)
-    @console.output ['.....', '.....', last_row]
+  def do_display(rows)
+    @console.output rows.map(&:to_s)
   end
 end
