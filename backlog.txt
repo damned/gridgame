@@ -8,7 +8,7 @@ X move player horizontal
 X message if player hits edge
 X show keys option
 X move player vertical
-end game with message if arrive at destination
+X end game with message if arrive at destination
 
 * basic game definition (size, end criteria)
 * a moving actor

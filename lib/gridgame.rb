@@ -24,8 +24,8 @@ class Gridgame
         quit
       else
         handle_move_key(c)
+        do_display unless game_over?
       end
-      do_display unless game_over?
     }
   end
 
@@ -43,8 +43,7 @@ class Gridgame
 
   def game_over?
     if @destination.x == @player.x && @destination.y == @player.y
-      @console.output ['Reached destination']
-      @console.release
+      game_over 'Reached destination'
       return true
     end
     false
@@ -64,6 +63,11 @@ class Gridgame
   end
 
   def quit
+    game_over 'Quitted game'
+  end
+
+  def game_over(message)
+    @console.output [message]
     @console.release
   end
 
