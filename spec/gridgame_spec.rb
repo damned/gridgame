@@ -50,6 +50,11 @@ class TestConsole
     self
   end
 
+  def up
+    simulate_input 'u'
+    self
+  end
+
   def released
     @released
   end
@@ -93,6 +98,13 @@ describe 'gridgame' do
     console.simulate_input 'u'
     expect(console.game_area).to eq ['...X.',
                                      '@....',
+                                     '.....']
+  end
+
+  xit 'can move player up into destination row' do
+    console.up.up
+    expect(console.game_area).to eq ['@..X.',
+                                     '.....',
                                      '.....']
   end
 

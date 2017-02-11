@@ -1,22 +1,42 @@
 require_relative 'console'
 
-class DestinationRow
+class Row
+  def initialize(*actors)
+    @actors = actors
+  end
   def to_s
-    '...X.'
+    row = '.....'
+    @actors.each {|actor|
+      row[actor.x] = actor.actor_to_s
+    }
+    row
   end
 end
 
-class EmptyRow
+class DestinationRow < Row
+  def initialize
+    super self
+  end
+  def x
+    3
+  end
+  def actor_to_s
+    'X'
+  end
+end
+
+class EmptyRow < Row
   def to_s
     '.....'
   end
 end
 
-class PlayerRow
+class PlayerRow < Row
   MIN_X = 0
   MAX_X = 4
   def initialize
     @player_x = MIN_X
+    super self
   end
   def left
     return false if @player_x == MIN_X
@@ -27,10 +47,11 @@ class PlayerRow
     return false if @player_x == MAX_X
     @player_x += 1
   end
-  def to_s
-    row = '.....'
-    row[@player_x] = '@'
-    row
+  def x
+    @player_x
+  end
+  def actor_to_s
+    '@'
   end
 end
 
