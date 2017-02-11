@@ -2,13 +2,17 @@ require_relative 'console'
 require_relative 'row'
 require_relative 'destination'
 require_relative 'player'
+require_relative 'game_area'
 
 class Gridgame
+  ROWS= 3
   def initialize(console = Console.new)
     @console = console
     @message = ''
     @player = Player.new 0, 2
-    @rows = [Row.new(Destination.new), Row.new, Row.new(@player)]
+    @game_area = GameArea.new ROWS
+    @game_area.add @player
+    @game_area.add Destination.new
   end
 
   def start
@@ -16,13 +20,11 @@ class Gridgame
     @console.input {|c|
       @message = ''
       if c == 'r'
-        check_moved(@player.right)
+        check_moved @game_area.right(@player)
       elsif c == 'l'
-        check_moved(@player.left)
+        check_moved @game_area.left(@player)
       elsif c == 'u'
-        @rows[@player.y].remove(@player)
-        check_moved(@player.up)
-        @rows[@player.y].add(@player)
+        check_moved @game_area.up(@player)
       elsif c == 'q'
         quit
       end
@@ -37,15 +39,7 @@ class Gridgame
   private
 
   def do_display
-    @console.output game_area + [@message, keys]
-  end
-
-  def game_area
-    @rows.map(&:to_s)
-  end
-
-  def player_row
-    @player_row
+    @console.output @game_area.rows.map(&:to_s) + [@message, keys]
   end
 
   def quit
