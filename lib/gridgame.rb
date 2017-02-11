@@ -31,12 +31,11 @@ class EmptyRow < Row
   end
 end
 
-class PlayerRow < Row
+class Player
   MIN_X = 0
   MAX_X = 4
   def initialize
     @player_x = MIN_X
-    super self
   end
   def left
     return false if @player_x == MIN_X
@@ -60,7 +59,8 @@ class Gridgame
     @console = console
     @message = ''
     @player_row_index = 2
-    @player_row = PlayerRow.new
+    @player = Player.new
+    @player_row = Row.new @player
     update_rows
   end
 
@@ -69,9 +69,9 @@ class Gridgame
     @console.input {|c|
       @message = ''
       if c == 'r'
-        check_moved(player_row.right)
+        check_moved(@player.right)
       elsif c == 'l'
-        check_moved(player_row.left)
+        check_moved(@player.left)
       elsif c == 'u'
         @player_row_index -= 1
         update_rows
