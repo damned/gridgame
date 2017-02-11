@@ -10,8 +10,12 @@ class TestConsole
     @screen
   end
 
-  def input
+  def input(&handler)
+    @input_handler = handler
+  end
 
+  def simulate_input(char)
+    @input_handler.call char
   end
 end
 
@@ -25,6 +29,14 @@ describe 'gridgame' do
     expect(console.last_screen).to eq ['.....', 
                                        '.....', 
                                        '@....']
+  end
+
+  it "moves player right if hit 'r'" do
+    game.start
+    console.simulate_input 'r'
+    expect(console.last_screen).to eq ['.....',
+                                       '.....',
+                                       '.@...']
   end
 
 end
