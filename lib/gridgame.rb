@@ -12,7 +12,8 @@ class Gridgame
     @player = Player.new 0, 2
     @game_area = GameArea.new ROWS
     @game_area.add @player
-    @game_area.add Destination.new
+    @destination = Destination.new
+    @game_area.add @destination
   end
 
   def start
@@ -24,7 +25,7 @@ class Gridgame
       else
         handle_move_key(c)
       end
-      do_display
+      do_display unless game_over?
     }
   end
 
@@ -39,6 +40,15 @@ class Gridgame
   end
 
   private
+
+  def game_over?
+    if @destination.x == @player.x && @destination.y == @player.y
+      @console.output ['Reached destination']
+      @console.release
+      return true
+    end
+    false
+  end
 
   def commands_by_key
   {

@@ -96,4 +96,10 @@ describe 'gridgame' do
     expect(console.messages.last).to include 'Move: lr'
     expect(console.messages.last).to include 'Quit: q'
   end
+
+  it 'ends game at destination' do
+    console.up.up.right.right.right
+    expect(console.last_screen.last).to eq 'Reached destination'
+    expect(console.released).to eq true
+  end
 end
