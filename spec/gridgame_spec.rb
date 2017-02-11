@@ -2,37 +2,46 @@ require 'rspec'
 require 'gridgame'
 
 class TestConsole
+
+  # quack like a Console
+
   def output(screen_lines)
     @screen = screen_lines
-  end
-
-  def last_screen
-    @screen
   end
 
   def input(&handler)
     @input_handler = handler
   end
 
+  # test api
+
+  def last_screen
+    @screen
+  end
+
   def simulate_input(char)
     @input_handler.call char
   end
-end
 
+  def right
+    simulate_input 'r'
+    self
+  end
+end
 
 describe 'gridgame' do
   let(:console) { TestConsole.new }
   subject(:game) { Gridgame.new console }
-  
+
+  before { game.start }
+
   it 'starts by displaying a small default game area with player on it' do
-    game.start
-    expect(console.last_screen).to eq ['.....', 
+    expect(console.last_screen).to eq ['.....',
                                        '.....', 
                                        '@....']
   end
 
   it "moves player right if hit 'r'" do
-    game.start
     console.simulate_input 'r'
     expect(console.last_screen).to eq ['.....',
                                        '.....',
@@ -40,9 +49,13 @@ describe 'gridgame' do
   end
 
   it "does not move player right if hit key other than 'r'" do
-    game.start
     console.simulate_input 'j'
     expect(console.last_screen.last).to eq '@....'
+  end
+
+  it 'moves player right multiple times' do
+    console.right.right.right
+    expect(console.last_screen.last).to eq '...@.'
   end
 
 end
