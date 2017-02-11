@@ -44,6 +44,7 @@ class Gridgame
   def start
     do_display
     @console.input {|c|
+      @message = ''
       if c == 'r'
         check_moved(player_row.right)
       elsif c == 'l'
@@ -60,7 +61,11 @@ class Gridgame
   private
 
   def do_display
-    @console.output @rows.map(&:to_s) + [@message]
+    @console.output game_area + [@message]
+  end
+
+  def game_area
+    @rows.map(&:to_s)
   end
 
   def player_row

@@ -79,4 +79,10 @@ describe 'gridgame' do
     expect(console.last_screen.last).to eq 'Cannot move there'
   end
 
+  it 'clears message the cycle after stopped at edge' do
+    console.left.right
+    expect(console.last_screen[2]).to eq '.@...'
+    expect(console.last_screen.last).to eq ''
+  end
+
 end
