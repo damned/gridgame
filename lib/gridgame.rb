@@ -16,6 +16,9 @@ class PlayerRow
   def initialize
     @player_x = 0
   end
+  def left
+    @player_x -= 1
+  end
   def right
     @player_x += 1
   end
@@ -35,10 +38,13 @@ class Gridgame
     rows = [DestinationRow.new, EmptyRow.new, PlayerRow.new]
     do_display(rows)
     @console.input {|c|
+      player_row = rows.last
       if c == 'r'
-        rows.last.right
-        do_display(rows)
+        player_row.right
+      elsif c == 'l'
+        player_row.left
       end
+      do_display(rows)
     }
   end
 

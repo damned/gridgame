@@ -4,7 +4,7 @@ X display initial game area
 X display player bottom corner
 X move player right
 X display destination object
-move player horizontal
+X move player horizontal
 message if player hits edge
 show keys option
 move player vertical
