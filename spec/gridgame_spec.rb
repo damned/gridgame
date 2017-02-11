@@ -2,6 +2,7 @@ require 'rspec'
 require 'gridgame'
 
 class TestConsole
+  MESSAGE_ROWS = 2
 
   def initialize
     @released = false
@@ -25,6 +26,14 @@ class TestConsole
 
   def last_screen
     @screen
+  end
+
+  def game_area
+    last_screen.first(last_screen.length - MESSAGE_ROWS)
+  end
+
+  def messages
+    last_screen.last(MESSAGE_ROWS)
   end
 
   def simulate_input(char)
@@ -53,53 +62,58 @@ describe 'gridgame' do
   before { game.start }
 
   it 'starts by displaying a small default game area with player and destination on it' do
-    expect(console.last_screen).to eq ['...X.',
+    expect(console.game_area).to eq ['...X.',
                                        '.....', 
-                                       '@....', '']
+                                       '@....']
   end
 
   it "moves player right if hit 'r'" do
     console.simulate_input 'r'
-    expect(console.last_screen).to eq ['...X.',
+    expect(console.game_area).to eq ['...X.',
                                        '.....',
-                                       '.@...', '']
+                                       '.@...']
   end
 
   it "does not move player right if hit key other than 'r'" do
     console.simulate_input 'j'
-    expect(console.last_screen[2]).to eq '@....'
+    expect(console.game_area.last).to eq '@....'
   end
 
   it 'moves player right multiple times' do
     console.right.right.right
-    expect(console.last_screen[2]).to eq '...@.'
+    expect(console.game_area.last).to eq '...@.'
   end
 
   it 'can move player left too' do
     console.right.right.left
-    expect(console.last_screen[2]).to eq '.@...'
+    expect(console.game_area.last).to eq '.@...'
   end
 
   it 'does not allow movement off left edge' do
     console.left
-    expect(console.last_screen[2]).to eq '@....'
-    expect(console.last_screen.last).to eq 'Cannot move there'
+    expect(console.game_area.last).to eq '@....'
+    expect(console.messages.first).to eq 'Cannot move there'
   end
 
   it 'does not allow movement off right edge' do
     console.right.right.right.right.right
     expect(console.last_screen[2]).to eq '....@'
-    expect(console.last_screen.last).to eq 'Cannot move there'
+    expect(console.messages.first).to eq 'Cannot move there'
   end
 
   it 'clears message the cycle after stopped at edge' do
     console.left.right
     expect(console.last_screen[2]).to eq '.@...'
-    expect(console.last_screen.last).to eq ''
+    expect(console.messages.first).to eq ''
   end
 
   it "will exit on 'q'" do
     console.simulate_input 'q'
     expect(console.released).to eq true
+  end
+
+  it 'shows keys' do
+    expect(console.messages.last).to include 'Move: lr'
+    expect(console.messages.last).to include 'Quit: q'
   end
 end

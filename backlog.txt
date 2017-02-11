@@ -6,7 +6,7 @@ X move player right
 X display destination object
 X move player horizontal
 X message if player hits edge
-show keys option
+X show keys option
 move player vertical
 end game with message if arrive at destination
 

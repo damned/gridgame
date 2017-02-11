@@ -63,7 +63,7 @@ class Gridgame
   private
 
   def do_display
-    @console.output game_area + [@message]
+    @console.output game_area + [@message, keys]
   end
 
   def game_area
@@ -76,5 +76,9 @@ class Gridgame
 
   def quit
     @console.release
+  end
+
+  def keys
+    'Move: lr, Quit: q'
   end
 end
