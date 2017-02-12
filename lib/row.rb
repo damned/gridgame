@@ -1,6 +1,7 @@
 class Row
-  def initialize(*actors)
-    @actors = actors
+  def initialize(row_size)
+    @row_size = row_size
+    @actors = []
   end
 
   def remove(actor)
@@ -12,7 +13,7 @@ class Row
   end
 
   def to_s
-    row = '.....'
+    row = '.' * @row_size
     @actors.each { |actor|
       row[actor.x] = actor.to_s
     }

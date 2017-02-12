@@ -1,35 +1,39 @@
 class Player
-  MIN_X = 0
-  MAX_X = 4
-  MIN_Y = 0
-  MAX_Y = 2
-
   attr_reader :x, :y
   def initialize(x, y)
     @x = x
     @y = y
   end
-  def left
-    return false if @x == MIN_X
-    @x -= 1
-    true
+  def left(context)
+    move_horizontal context, -1
   end
-  def right
-    return false if @x == MAX_X
-    @x += 1
-    true
+  def right(context)
+    move_horizontal context, 1
   end
-  def up
-    return false if @y == MIN_Y
-    @y -= 1
-    true
+  def up(context)
+    move_vertical context, -1
   end
-  def down
-    return false if @y == MAX_Y
-    @y += 1
-    true
+  def down(context)
+    move_vertical context, 1
   end
   def to_s
     '@'
   end
+
+  private
+
+  def move_horizontal(context, dx)
+    newx = @x + dx
+    return false unless context.x_ok?(newx)
+    @x = newx
+    true
+  end
+
+  def move_vertical(context, dy)
+    newy = @y + dy
+    return false unless context.y_ok?(newy)
+    @y = newy
+    true
+  end
+
 end

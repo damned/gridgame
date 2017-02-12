@@ -102,4 +102,24 @@ describe 'gridgame' do
     expect(console.last_screen.last).to eq 'Reached destination'
     expect(console.released).to eq true
   end
+
+  context 'customized game definition' do
+    subject(:game) { Gridgame.new console, width: 4, height: 4 }
+
+    it 'can change game size' do
+      expect(console.game_area).to eq ['...X',
+                                       '....',
+                                       '@...',
+                                       '....']
+    end
+
+    it 'limits at custom game area size' do
+      console.right.right.right.right.right.down.down
+      expect(console.game_area).to eq ['...X',
+                                       '....',
+                                       '....',
+                                       '...@']
+    end
+  end
+
 end

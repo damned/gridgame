@@ -5,12 +5,11 @@ require_relative 'player'
 require_relative 'game_area'
 
 class Gridgame
-  ROWS = 3
-  def initialize(console = Console.new)
+  def initialize(console = Console.new, width: 5, height: 3)
     @console = console
     @message = ''
     @player = Player.new 0, 2
-    @game_area = GameArea.new ROWS
+    @game_area = GameArea.new width, height
     @game_area.add @player
     @destination = Destination.new
     @game_area.add @destination
