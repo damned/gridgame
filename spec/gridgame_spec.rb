@@ -14,14 +14,14 @@ describe 'gridgame' do
                                      '@....']
   end
 
-  it "moves player right if hit 'r'" do
-    console.simulate_input 'r'
+  it 'moves player right if hit right arrow' do
+    console.simulate_input 'right'
     expect(console.game_area).to eq ['...X.',
                                      '.....',
                                      '.@...']
   end
 
-  it "does not move player right if hit key other than 'r'" do
+  it 'does not move player right if hit another key' do
     console.simulate_input 'j'
     expect(console.game_area.last).to eq '@....'
   end
@@ -32,19 +32,19 @@ describe 'gridgame' do
   end
 
   it 'can move player left' do
-    console.right.right.simulate_input 'l'
+    console.right.right.simulate_input 'left'
     expect(console.game_area.last).to eq '.@...'
   end
 
   it 'can move player up' do
-    console.simulate_input 'u'
+    console.simulate_input 'up'
     expect(console.game_area).to eq ['...X.',
                                      '@....',
                                      '.....']
   end
 
   it 'can move player down' do
-    console.up.up.right.simulate_input 'd'
+    console.up.up.right.simulate_input 'down'
     expect(console.game_area).to eq ['...X.',
                                      '.@...',
                                      '.....']
@@ -93,7 +93,7 @@ describe 'gridgame' do
   end
 
   it 'shows keys' do
-    expect(console.messages.last).to include 'Move: lr'
+    expect(console.messages.last).to include 'Move: arrows'
     expect(console.messages.last).to include 'Quit: q'
   end
 

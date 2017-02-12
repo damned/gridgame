@@ -38,22 +38,22 @@ class TestConsole
   end
 
   def right
-    simulate_input 'r'
+    simulate_input 'right'
     self
   end
 
   def left
-    simulate_input 'l'
+    simulate_input 'left'
     self
   end
 
   def up
-    simulate_input 'u'
+    simulate_input 'up'
     self
   end
 
   def down
-    simulate_input 'd'
+    simulate_input 'down'
     self
   end
 

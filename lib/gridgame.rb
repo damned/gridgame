@@ -29,8 +29,8 @@ class Gridgame
   end
 
   def handle_move_key(c)
-    if commands_by_key.has_key?(c)
-      check_moved @game_area.send(commands_by_key[c], @player)
+    if moves_by_key.has_key?(c)
+      check_moved @game_area.send(moves_by_key[c], @player)
     end
   end
 
@@ -48,12 +48,12 @@ class Gridgame
     false
   end
 
-  def commands_by_key
+  def moves_by_key
   {
-    'l' => :left,
-    'r' => :right,
-    'd' => :down,
-    'u' => :up
+    'left' => :left,
+    'right' => :right,
+    'down' => :down,
+    'up' => :up
   }
   end
 
@@ -71,6 +71,6 @@ class Gridgame
   end
 
   def keys
-    "Move: #{commands_by_key.keys.join ''}, Quit: q"
+    "Move: arrows, Quit: q"
   end
 end
