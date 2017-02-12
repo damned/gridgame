@@ -1,4 +1,4 @@
-class Destination
+class Actor
   def initialize(position)
     @position = position
   end
@@ -8,6 +8,12 @@ class Destination
   def y
     @position.y
   end
+  def to_s
+    'a'
+  end
+end
+
+class Destination < Actor
   def to_s
     'X'
   end

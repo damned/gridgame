@@ -17,7 +17,7 @@ X change starting positions
 
 * a moving actor
 
-add non-player actor
+X add non-player actor
 move actor across area
 actor marches turning right
 

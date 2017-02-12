@@ -23,6 +23,10 @@ class GameConfig
     self
   end
 
+  def with_actor_at(x, y)
+    place :actor, x, y
+  end
+
   def with_player_at(x, y)
     place :player, x, y
   end

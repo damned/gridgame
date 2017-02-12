@@ -13,6 +13,12 @@ class Gridgame
     @game_area.add @player
     @destination = Destination.new config.positions[:destination]
     @game_area.add @destination
+    actor_position = config.positions[:actor]
+    unless actor_position.nil?
+      actor = Actor.new actor_position
+      @game_area.add actor
+    end
+    @actor = actor
   end
 
   def start

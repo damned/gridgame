@@ -139,4 +139,16 @@ describe 'gridgame' do
     end
   end
 
+  context 'with an actor' do
+    subject(:game) { Gridgame.new(console: console, config: config) }
+    describe 'static actor' do
+      let(:config) { GameConfig.new.with_actor_at(1, 1) }
+
+      it 'shows actor' do
+        expect(console.game_area).to eq ['...X.',
+                                         '.a...',
+                                         '@....']
+      end
+    end
+  end
 end
