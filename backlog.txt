@@ -16,6 +16,11 @@ X change game area size
 X change starting positions
 
 * a moving actor
+
+add non-player actor
+move actor across area
+actor marches turning right
+
 * a solid object (cannot be moved onto)
 * an attribute
 * attribute changed by moving onto object
