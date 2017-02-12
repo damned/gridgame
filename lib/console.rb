@@ -1,8 +1,8 @@
-require 'io/console'
+require 'remedy'
 class Console
+  include Remedy
   def intitialize
     @release = false
-    instream.raw!
   end
 
   def output(lines)
@@ -12,20 +12,15 @@ class Console
   end
 
   def input
-    while (c = instream.getch) do
-      yield c
+    interaction = Interaction.new
+    interaction.loop do |key|
+      yield key.to_s
       break if @release
     end
   end
 
   def release
     @release = true
-  end
-
-  private
-
-  def instream
-    STDIN
   end
 
 end

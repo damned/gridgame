@@ -17,12 +17,12 @@ class Gridgame
 
   def start
     do_display
-    @console.input {|c|
+    @console.input {|key|
       @message = ''
-      if c == 'q'
+      if key == 'q'
         quit
       else
-        handle_move_key(c)
+        handle_move_key(key)
         do_display unless game_over?
       end
     }
