@@ -1,19 +1,10 @@
-class Actor
-  def initialize(position)
-    @position = position
-  end
-  def x
-    @position.x
-  end
-  def y
-    @position.y
-  end
-  def to_s
-    'a'
-  end
-end
+require_relative 'actor'
 
 class Destination < Actor
+  def tick(area)
+
+  end
+  
   def to_s
     'X'
   end

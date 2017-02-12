@@ -13,14 +13,6 @@ class GameArea
     @rows
   end
 
-  def x_ok?(x)
-    x >= 0 && x < @row_size
-  end
-
-  def y_ok?(y)
-    y >= 0 && y < @row_count
-  end
-
   def right(actor)
     actor.right self
   end
@@ -45,4 +37,20 @@ class GameArea
       }.join('')
     }
   end
+
+  def ok?(pos)
+    x_ok?(pos.x) && y_ok?(pos.y)
+  end
+
+  private
+
+  def x_ok?(x)
+    x >= 0 && x < @row_size
+  end
+
+  def y_ok?(y)
+    y >= 0 && y < @row_count
+  end
+
+
 end

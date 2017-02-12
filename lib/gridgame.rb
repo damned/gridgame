@@ -20,9 +20,20 @@ class Gridgame
       if key == 'q'
         quit
       else
-        handle_move_key(key)
-        do_display unless game_over?
+        tick key
       end
+    }
+  end
+
+  def tick(key)
+    handle_move_key(key)
+    update_actors
+    do_display unless game_over?
+  end
+
+  def update_actors
+    @actors.values.reject(&:player?).each {|actor|
+      actor.tick @game_area
     }
   end
 

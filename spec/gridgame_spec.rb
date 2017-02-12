@@ -149,6 +149,17 @@ describe 'gridgame' do
                                          '.a...',
                                          '@....']
       end
+
+      it 'moves actor to right each tick' do
+        console.up
+        expect(console.game_area).to eq ['...X.',
+                                         '@.a..',
+                                         '.....']
+        console.left
+        expect(console.game_area).to eq ['...X.',
+                                         '@..a.',
+                                         '.....']
+      end
     end
   end
 end
