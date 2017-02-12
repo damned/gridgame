@@ -1,10 +1,6 @@
-require_relative 'actor'
+require_relative 'static_actor'
 
-class Destination < Actor
-  def tick(area)
-
-  end
-  
+class Destination < StaticActor
   def to_s
     'X'
   end

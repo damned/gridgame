@@ -1,6 +1,8 @@
 require_relative 'console'
 require_relative 'destination'
 require_relative 'player'
+require_relative 'blocker'
+require_relative 'actor'
 require_relative 'game_area'
 require_relative 'game_config'
 
@@ -94,7 +96,8 @@ class Gridgame
   ActorClasses = {
       player: Player,
       destination: Destination,
-      actor: Actor
+      actor: Actor,
+      blocker: Blocker
   }
 
   def add_actors(config)

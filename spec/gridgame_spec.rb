@@ -137,51 +137,15 @@ describe 'gridgame' do
                                          'X...']
       end
     end
-  end
 
-  context 'with an actor' do
-    subject(:game) { Gridgame.new(console: console, config: config) }
-    describe 'static actor' do
-      let(:config) { GameConfig.new.with_actor_at(1, 1) }
+    describe 'a blocker' do
+      let(:config) { GameConfig.new.with_blocker_at(1, 2) }
 
-      it 'shows actor' do
+      it 'stops player moving over it' do
+        console.right
         expect(console.game_area).to eq ['...X.',
-                                         '.a...',
-                                         '@....']
-      end
-
-      it 'moves actor to right each tick' do
-        console.up
-        expect(console.game_area).to eq ['...X.',
-                                         '@.a..',
-                                         '.....']
-        console.left
-        expect(console.game_area).to eq ['...X.',
-                                         '@..a.',
-                                         '.....']
-      end
-
-      it 'actor turns right and moves if blocked' do
-        console.up.up.up.up
-        expect(console.game_area).to eq ['@..X.',
                                          '.....',
-                                         '....a']
-        console.up
-        expect(console.game_area).to eq ['@..X.',
-                                         '.....',
-                                         '...a.']
-        console.up.up.up.up
-        expect(console.game_area).to eq ['@..X.',
-                                         'a....',
-                                         '.....']
-        console.up.up
-        expect(console.game_area).to eq ['@a.X.',
-                                         '.....',
-                                         '.....']
-        console.up.up.up.up
-        expect(console.game_area).to eq ['@..X.',
-                                         '....a',
-                                         '.....']
+                                         '@B...']
       end
     end
   end

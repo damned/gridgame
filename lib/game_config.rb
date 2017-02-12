@@ -1,11 +1,4 @@
-
-class Position
-  attr_reader :x, :y
-  def initialize(x, y)
-    @x = x
-    @y = y
-  end
-end
+require_relative 'position'
 
 class GameConfig
   attr_reader :width, :height, :positions
@@ -25,6 +18,10 @@ class GameConfig
 
   def with_actor_at(x, y)
     place :actor, x, y
+  end
+
+  def with_blocker_at(x, y)
+    place :blocker, x, y
   end
 
   def with_player_at(x, y)

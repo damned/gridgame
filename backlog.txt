@@ -21,7 +21,10 @@ X add non-player actor
 X move actor across area
 X actor marches turning right
 
-* a solid object (cannot be moved onto)
+* misc
+X a solid object (cannot be moved onto)
+tidy: actors folder
+
 * an attribute
 * attribute changed by moving onto object
 * doorway to another room

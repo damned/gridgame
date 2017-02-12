@@ -30,19 +30,33 @@ class GameArea
   end
 
   def to_a
-    (0..(@row_count - 1)).map {|y|
-      (0..(@row_size - 1)).map {|x|
+    row_indices.map {|y|
+      column_indices.map {|x|
         actor = @actors.find {|actor| actor.x == x && actor.y ==y }
         actor.nil? ? '.' : actor.to_s
       }.join('')
     }
   end
 
-  def ok?(pos)
-    x_ok?(pos.x) && y_ok?(pos.y)
+  def ok?(pos, actor)
+    x_ok?(pos.x) && y_ok?(pos.y) && actors_at(pos).all?{|actor_here| actor_here.move_here_ok?(actor)}
   end
 
   private
+
+  def actors_at(pos)
+    @actors.select {|actor|
+      actor.at?(pos)
+    }
+  end
+
+  def column_indices
+    (0..(@row_size - 1))
+  end
+
+  def row_indices
+    (0..(@row_count - 1))
+  end
 
   def x_ok?(x)
     x >= 0 && x < @row_size

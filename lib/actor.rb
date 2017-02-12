@@ -13,6 +13,14 @@ class Actor
     @position.y
   end
 
+  def at?(pos)
+    @position == pos
+  end
+
+  def move_here_ok?(mover)
+    true
+  end
+
   def player?
     false
   end
@@ -46,7 +54,7 @@ class Actor
 
   def move(area, dx, dy)
     newpos = Position.new(@position.x + dx, @position.y + dy)
-    return false unless area.ok?(newpos)
+    return false unless area.ok?(newpos, self)
     @position = newpos
     true
   end
