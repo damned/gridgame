@@ -2,13 +2,14 @@ require_relative 'console'
 require_relative 'destination'
 require_relative 'player'
 require_relative 'game_area'
+require_relative 'game_config'
 
 class Gridgame
-  def initialize(console = Console.new, width: 5, height: 3)
+  def initialize(console: Console.new, config: GameConfig.new)
     @console = console
     @message = ''
     @player = Player.new 0, 2
-    @game_area = GameArea.new width, height
+    @game_area = GameArea.new config.width, config.height
     @game_area.add @player
     @destination = Destination.new
     @game_area.add @destination

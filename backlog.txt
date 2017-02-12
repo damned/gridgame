@@ -20,3 +20,4 @@ change starting positions
 * an attribute
 * attribute changed by moving onto object
 * doorway to another room
+* level generation

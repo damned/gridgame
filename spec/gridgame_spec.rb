@@ -4,7 +4,7 @@ require_relative 'test_console'
 
 describe 'gridgame' do
   let(:console) { TestConsole.new }
-  subject(:game) { Gridgame.new console }
+  subject(:game) { Gridgame.new console: console }
 
   before { game.start }
 
@@ -104,7 +104,7 @@ describe 'gridgame' do
   end
 
   context 'customized game definition' do
-    subject(:game) { Gridgame.new console, width: 4, height: 4 }
+    subject(:game) { Gridgame.new(console: console, config: GameConfig.new.with_size(4, 4)) }
 
     it 'can change game size' do
       expect(console.game_area).to eq ['...X',
