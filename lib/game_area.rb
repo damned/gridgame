@@ -2,11 +2,11 @@ class GameArea
   def initialize(row_size, row_count)
     @row_size = row_size
     @row_count = row_count
-    @rows = (1..row_count).map { Row.new(row_size) }
+    @actors = []
   end
 
   def add(actor)
-    rows[actor.y].add actor
+    @actors << actor
   end
 
   def rows
@@ -30,16 +30,19 @@ class GameArea
   end
 
   def up(actor)
-    @rows[actor.y].remove(actor)
-    result = actor.up self
-    @rows[actor.y].add(actor)
-    result
+    actor.up self
   end
 
   def down(actor)
-    @rows[actor.y].remove(actor)
-    result = actor.down self
-    @rows[actor.y].add(actor)
-    result
+    actor.down self
+  end
+
+  def to_a
+    (0..(@row_count - 1)).map {|y|
+      (0..(@row_size - 1)).map {|x|
+        actor = @actors.find {|actor| actor.x == x && actor.y ==y }
+        actor.nil? ? '.' : actor.to_s
+      }.join('')
+    }
   end
 end

@@ -1,5 +1,4 @@
 require_relative 'console'
-require_relative 'row'
 require_relative 'destination'
 require_relative 'player'
 require_relative 'game_area'
@@ -58,7 +57,7 @@ class Gridgame
   end
 
   def do_display
-    @console.output @game_area.rows.map(&:to_s) + [@message, keys]
+    @console.output @game_area.to_a + [@message, keys]
   end
 
   def quit
