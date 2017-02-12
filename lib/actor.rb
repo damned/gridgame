@@ -1,6 +1,8 @@
 class Actor
+  Directions = %i(right down left up)
   def initialize(position)
     @position = position
+    @direction_index = 0
   end
 
   def x
@@ -16,7 +18,11 @@ class Actor
   end
 
   def tick(area)
-    area.right(self)
+    direction = Directions[@direction_index]
+    until area.send(direction, self) do
+      @direction_index = (@direction_index + 1) % 4
+      direction = Directions[@direction_index]
+    end
   end
 
   def to_s

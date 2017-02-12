@@ -19,7 +19,7 @@ X change starting positions
 
 X add non-player actor
 X move actor across area
-actor marches turning right
+X actor marches turning right
 
 * a solid object (cannot be moved onto)
 * an attribute
