@@ -8,10 +8,9 @@ class Gridgame
   def initialize(console: Console.new, config: GameConfig.new)
     @console = console
     @message = ''
-    @config = config
     @game_area = GameArea.new config.width, config.height
     @actors = {}
-    add_actors
+    add_actors config
   end
 
   def start
@@ -81,22 +80,22 @@ class Gridgame
     "Move: arrows, Quit: q"
   end
 
-  def add_actors
-    add_actor_if_present(Player, :player)
-    add_actor_if_present(Destination, :destination)
-    add_actor_if_present(Actor, :actor)
+  ActorClasses = {
+      player: Player,
+      destination: Destination,
+      actor: Actor
+  }
+
+  def add_actors(config)
+    config.positions.each {|key, position|
+      add_actor(ActorClasses[key], key, position)
+    }
   end
 
-  def add_actor_if_present(actor_class, key)
-    position = @config.positions[key]
-    unless position.nil?
-      add_configured_actor(actor_class, key, position)
-    end
-  end
-
-  def add_configured_actor(actor_class, key, position)
+  def add_actor(actor_class, key, position)
     actor = actor_class.new position
     @actors[key] = actor
     @game_area.add actor
   end
+
 end
