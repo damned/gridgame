@@ -8,17 +8,10 @@ class Gridgame
   def initialize(console: Console.new, config: GameConfig.new)
     @console = console
     @message = ''
-    @player = Player.new config.positions[:player]
+    @config = config
     @game_area = GameArea.new config.width, config.height
-    @game_area.add @player
-    @destination = Destination.new config.positions[:destination]
-    @game_area.add @destination
-    actor_position = config.positions[:actor]
-    unless actor_position.nil?
-      actor = Actor.new actor_position
-      @game_area.add actor
-    end
-    @actor = actor
+    @actors = {}
+    add_actors
   end
 
   def start
@@ -36,7 +29,7 @@ class Gridgame
 
   def handle_move_key(c)
     if moves_by_key.has_key?(c)
-      check_moved @game_area.send(moves_by_key[c], @player)
+      check_moved @game_area.send(moves_by_key[c], player)
     end
   end
 
@@ -46,8 +39,16 @@ class Gridgame
 
   private
 
+  def player
+    @actors[:player]
+  end
+
+  def destination
+    @actors[:destination]
+  end
+
   def game_over?
-    if @destination.x == @player.x && @destination.y == @player.y
+    if destination.x == player.x && destination.y == player.y
       game_over 'Reached destination'
       return true
     end
@@ -78,5 +79,24 @@ class Gridgame
 
   def keys
     "Move: arrows, Quit: q"
+  end
+
+  def add_actors
+    add_actor_if_present(Player, :player)
+    add_actor_if_present(Destination, :destination)
+    add_actor_if_present(Actor, :actor)
+  end
+
+  def add_actor_if_present(actor_class, key)
+    position = @config.positions[key]
+    unless position.nil?
+      add_configured_actor(actor_class, key, position)
+    end
+  end
+
+  def add_configured_actor(actor_class, key, position)
+    actor = actor_class.new position
+    @actors[key] = actor
+    @game_area.add actor
   end
 end
