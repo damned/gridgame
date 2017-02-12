@@ -1,9 +1,12 @@
 class Destination
+  def initialize(position)
+    @position = position
+  end
   def x
-    3
+    @position.x
   end
   def y
-    0
+    @position.y
   end
   def to_s
     'X'

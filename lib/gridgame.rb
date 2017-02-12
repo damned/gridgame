@@ -8,10 +8,10 @@ class Gridgame
   def initialize(console: Console.new, config: GameConfig.new)
     @console = console
     @message = ''
-    @player = Player.new 0, 2
+    @player = Player.new config.positions[:player]
     @game_area = GameArea.new config.width, config.height
     @game_area.add @player
-    @destination = Destination.new
+    @destination = Destination.new config.positions[:destination]
     @game_area.add @destination
   end
 

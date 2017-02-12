@@ -1,8 +1,8 @@
 class Player
   attr_reader :x, :y
-  def initialize(x, y)
-    @x = x
-    @y = y
+  def initialize(position)
+    @x = position.x
+    @y = position.y
   end
   def left(context)
     move_horizontal context, -1

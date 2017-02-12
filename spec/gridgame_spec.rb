@@ -104,21 +104,38 @@ describe 'gridgame' do
   end
 
   context 'customized game definition' do
-    subject(:game) { Gridgame.new(console: console, config: GameConfig.new.with_size(4, 4)) }
+    subject(:game) { Gridgame.new(console: console, config: config) }
 
-    it 'can change game size' do
-      expect(console.game_area).to eq ['...X',
-                                       '....',
-                                       '@...',
-                                       '....']
+    describe 'custom size' do
+      let(:config) { GameConfig.new.with_size(4, 4) }
+
+      it 'can change game size' do
+        expect(console.game_area).to eq ['...X',
+                                         '....',
+                                         '@...',
+                                         '....']
+      end
+
+      it 'limits at custom game area size' do
+        console.right.right.right.right.right.down.down
+        expect(console.game_area).to eq ['...X',
+                                         '....',
+                                         '....',
+                                         '...@']
+      end
     end
 
-    it 'limits at custom game area size' do
-      console.right.right.right.right.right.down.down
-      expect(console.game_area).to eq ['...X',
-                                       '....',
-                                       '....',
-                                       '...@']
+    describe 'custom positions' do
+      let(:config) { GameConfig.new.with_size(4, 4)
+                         .with_player_at(3, 1)
+                         .with_destination_at(0, 3) }
+
+      it 'limits at custom game area size' do
+        expect(console.game_area).to eq ['....',
+                                         '...@',
+                                         '....',
+                                         'X...']
+      end
     end
   end
 

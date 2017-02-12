@@ -13,7 +13,7 @@ X end game with message if arrive at destination
 * basic game definition (size, end criteria)
 
 X change game area size
-change starting positions
+X change starting positions
 
 * a moving actor
 * a solid object (cannot be moved onto)
