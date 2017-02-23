@@ -23,7 +23,7 @@ X actor marches turning right
 
 * misc
 X a solid object (cannot be moved onto)
-tidy: actors folder
+X tidy: actors folder
 
 * an attribute
 * attribute changed by moving onto object

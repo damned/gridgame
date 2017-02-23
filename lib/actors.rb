@@ -1,0 +1,5 @@
+require_relative 'actors/destination'
+require_relative 'actors/blocker'
+require_relative 'actors/player'
+require_relative 'actors/static_actor'
+require_relative 'actors/actor'

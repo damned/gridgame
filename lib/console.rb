@@ -1,4 +1,5 @@
 require 'remedy'
+
 class Console
   include Remedy
   def intitialize

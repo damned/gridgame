@@ -1,5 +1,9 @@
 require_relative 'lib/gridgame'
 
+task 'test' do
+  system 'rspec'
+end
+
 task 'run' do
   config = GameConfig.new.
       with_size(20, 10).

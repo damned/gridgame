@@ -32,7 +32,7 @@ class GameArea
   def to_a
     row_indices.map {|y|
       column_indices.map {|x|
-        actor = @actors.find {|actor| actor.x == x && actor.y ==y }
+        actor = @actors.find {|a| a.x == x && a.y == y }
         actor.nil? ? '.' : actor.to_s
       }.join('')
     }

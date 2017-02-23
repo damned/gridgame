@@ -1,8 +1,5 @@
 require_relative 'console'
-require_relative 'destination'
-require_relative 'player'
-require_relative 'blocker'
-require_relative 'actor'
+require_relative 'actors'
 require_relative 'game_area'
 require_relative 'game_config'
 
