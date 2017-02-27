@@ -97,6 +97,10 @@ describe 'gridgame' do
     expect(console.messages.last).to include 'Quit: q'
   end
 
+  it 'shows player attributes' do
+    expect(console.player_status).to include 'Player: 0XP'
+  end
+
   it 'ends game at destination' do
     console.up.up.right.right.right
     expect(console.last_screen.last).to eq 'Reached destination'
@@ -146,6 +150,15 @@ describe 'gridgame' do
         expect(console.game_area).to eq ['...X.',
                                          '.....',
                                          '@B...']
+      end
+    end
+  end
+
+  describe 'attributes' do
+    describe 'experience' do
+      it 'rises over time' do
+        console.right
+        expect(console.player_status).to include '1XP'
       end
     end
   end

@@ -28,8 +28,9 @@ X tidy: actors folder
 
 * an attribute
 
-. changes with time
+X changes with time
 . changed by moving onto object
+. calculated attribute (level from xp?)
 
 * inventory and objects
 

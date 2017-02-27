@@ -1,5 +1,5 @@
 class TestConsole
-  MESSAGE_ROWS = 2
+  MESSAGE_ROWS = 3
 
   def initialize
     @released = false
@@ -20,6 +20,10 @@ class TestConsole
   end
 
   # test api
+
+  def player_status
+    messages[-2]
+  end
 
   def last_screen
     @screen

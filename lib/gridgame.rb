@@ -31,7 +31,7 @@ class Gridgame
   end
 
   def update_actors
-    @actors.values.reject(&:player?).each {|actor|
+    @actors.values.each {|actor|
       actor.tick @game_area
     }
   end
@@ -74,7 +74,11 @@ class Gridgame
   end
 
   def do_display
-    @console.output @game_area.to_a + [@message, keys]
+    @console.output @game_area.to_a + [@message, status, keys]
+  end
+
+  def status
+    "Player: #{player.status}"
   end
 
   def quit
