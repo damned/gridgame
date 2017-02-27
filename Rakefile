@@ -11,6 +11,7 @@ task 'run' do
       with_destination_at(18, 1).
       with_blocker_at(4, 9).
       with_experience_builder_at(7, 6).
+      with_charming_chain_at(1, 1).
       with_actor_at(14, 3)
 
   Gridgame.new(config: config).start

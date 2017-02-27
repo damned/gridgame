@@ -27,6 +27,12 @@ class Actor
     false
   end
 
+  def whats_here_in(game_area)
+    game_area.whats_at(position).reject {|thing|
+      thing == self
+    }
+  end
+
   def tick(area)
     direction = Directions[@direction_index]
     until area.send(direction, self) do
@@ -39,7 +45,15 @@ class Actor
     #NOP
   end
 
+  def takeable?
+    false
+  end
+
   def to_s
+    to_c
+  end
+
+  def to_c
     'a'
   end
 

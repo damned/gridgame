@@ -4,7 +4,8 @@ require_relative 'test_console'
 
 describe 'gridgame' do
   let(:console) { TestConsole.new }
-  subject(:game) { Gridgame.new console: console }
+  let(:config) { GameConfig.new }
+  subject(:game) { Gridgame.new console: console, config: config }
 
   before { game.start }
 
@@ -108,8 +109,6 @@ describe 'gridgame' do
   end
 
   context 'customized game definition' do
-    subject(:game) { Gridgame.new(console: console, config: config) }
-
     describe 'custom size' do
       let(:config) { GameConfig.new.with_size(4, 4) }
 
@@ -155,8 +154,6 @@ describe 'gridgame' do
   end
 
   describe 'attributes' do
-    subject(:game) { Gridgame.new(console: console, config: config) }
-
     describe 'experience' do
       let(:config) { GameConfig.new.with_experience_builder_at(0, 0) }
 
@@ -175,5 +172,18 @@ describe 'gridgame' do
         expect(console.player_status).to include '23XP'
       end
     end
+  end
+
+  describe 'takeable objects' do
+    let(:config) { GameConfig.new.with_charming_chain_at(1, 1) }
+
+    it 'allows player to take takeable objects' do
+      expect(console.game_area[1][1]).to eq 'c'
+      console.up.right
+      expect(console.messages.first).to include 'charming chain'
+      console.take.right
+      expect(console.game_area[1][1]).to eq '.'
+    end
+
   end
 end

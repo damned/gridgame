@@ -6,7 +6,7 @@ require_relative 'game_config'
 class Gridgame
   def initialize(console: Console.new, config: GameConfig.new)
     @console = console
-    @message = ''
+    @messages = []
     @game_area = GameArea.new config.width, config.height
     @actors = {}
     add_actors config
@@ -15,7 +15,7 @@ class Gridgame
   def start
     do_display
     @console.input {|key|
-      @message = ''
+      @messages = []
       if key == 'q'
         quit
       else
@@ -25,10 +25,16 @@ class Gridgame
   end
 
   def tick(key)
-    handle_move_key(key)
+    handle_keys(key)
     update_actors
     post_tick
+    whats_here
     do_display unless game_over?
+  end
+
+  def handle_keys(key)
+    handle_move_key(key)
+    handle_action_key(key)
   end
 
   def update_actors
@@ -49,11 +55,30 @@ class Gridgame
     end
   end
 
+  def handle_action_key(c)
+    if actions_by_key.has_key?(c)
+      player.send(actions_by_key[c], @game_area)
+    end
+  end
+
   def check_moved(moved)
-    @message = 'Cannot move there' unless moved
+    add_message('Cannot move there') unless moved
   end
 
   private
+
+  def whats_here
+    things_here = player.whats_here_in @game_area
+    add_message "You can see: #{things_here.join ', '}" unless things_here.empty?
+  end
+
+  def add_message(message)
+    @messages << message
+  end
+
+  def message
+    @messages.join '. '
+  end
 
   def player
     @actors[:player]
@@ -80,8 +105,14 @@ class Gridgame
   }
   end
 
+  def actions_by_key
+  {
+    't' => :take,
+  }
+  end
+
   def do_display
-    @console.output @game_area.to_a + [@message, status, keys]
+    @console.output @game_area.to_a + [message, status, keys]
   end
 
   def status
@@ -98,7 +129,7 @@ class Gridgame
   end
 
   def keys
-    "Move: arrows, Quit: q"
+    "Move: arrows, Take: t, Quit: q"
   end
 
   ActorClasses = {
@@ -106,7 +137,8 @@ class Gridgame
       destination: Destination,
       actor: Actor,
       blocker: Blocker,
-      experience_builder: AttributeBuilder
+      experience_builder: AttributeBuilder,
+      charming_chain: CharmingChain
   }
 
   def add_actors(config)

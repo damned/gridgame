@@ -15,14 +15,14 @@ class AttributeBuilder < StaticActor
     generate_moved_here_events area
   end
 
-  def to_s
+  def to_c
     '+'
   end
 
   private
 
   def generate_moved_here_events(area)
-    actors_here = area.at?(@position)
+    actors_here = area.whats_at(@position)
     actors_here.reject { |actor|
       @last_here.include? actor
     }.each { |actor|

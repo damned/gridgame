@@ -33,28 +33,30 @@ class GameArea
     row_indices.map {|y|
       column_indices.map {|x|
         actor = @actors.find {|a| a.x == x && a.y == y }
-        actor.nil? ? '.' : actor.to_s
+        actor.nil? ? '.' : actor.to_c
       }.join('')
     }
   end
 
   def ok?(pos, actor)
-    x_ok?(pos.x) && y_ok?(pos.y) && actors_at(pos).all?{|actor_here| actor_here.move_here_ok?(actor)}
+    x_ok?(pos.x) && y_ok?(pos.y) && whats_at(pos).all?{|actor_here| actor_here.move_here_ok?(actor)}
   end
 
-  def at?(position)
+  def take_all(position)
+    objects = whats_at(position).select(&:takeable?)
+    objects.each {|o|
+      @actors.delete o
+    }
+    objects
+  end
+
+  def whats_at(position)
     @actors.select {|actor|
       actor.position == position
     }
   end
 
   private
-
-  def actors_at(pos)
-    @actors.select {|actor|
-      actor.at?(pos)
-    }
-  end
 
   def column_indices
     (0..(@row_size - 1))

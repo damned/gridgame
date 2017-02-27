@@ -5,7 +5,7 @@ class Blocker < StaticActor
     false
   end
 
-  def to_s
+  def to_c
     'B'
   end
 end

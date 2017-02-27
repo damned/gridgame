@@ -28,6 +28,10 @@ class GameConfig
     place :experience_builder, x, y
   end
 
+  def with_charming_chain_at(x, y)
+    place :charming_chain, x, y
+  end
+
   def with_player_at(x, y)
     place :player, x, y
   end

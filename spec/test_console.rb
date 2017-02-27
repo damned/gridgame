@@ -61,6 +61,11 @@ class TestConsole
     self
   end
 
+  def take
+    simulate_input 't'
+    self
+  end
+
   def down
     simulate_input 'down'
     self
