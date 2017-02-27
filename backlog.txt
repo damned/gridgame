@@ -22,10 +22,37 @@ X move actor across area
 X actor marches turning right
 
 * misc
+
 X a solid object (cannot be moved onto)
 X tidy: actors folder
 
 * an attribute
-* attribute changed by moving onto object
+
+. changes with time
+. changed by moving onto object
+
+* inventory and objects
+
+. pick up certain objects
+. drop an object
+. use an object
+
+* actor interaction
+
+. specific interaction
+. interaction conditional on interaction with actor
+. attribute changed by interaction with actor
+
 * doorway to another room
+
+. move into doorway switches to new room
+
 * level generation
+
+. random number of objects
+. random number of actors
+. random number of rooms
+. random actor names
+. random actor faces
+. random room sizes
+. random object attributes
