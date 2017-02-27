@@ -27,12 +27,19 @@ class Gridgame
   def tick(key)
     handle_move_key(key)
     update_actors
+    post_tick
     do_display unless game_over?
   end
 
   def update_actors
     @actors.values.each {|actor|
       actor.tick @game_area
+    }
+  end
+
+  def post_tick
+    @actors.values.each {|actor|
+      actor.post_tick @game_area
     }
   end
 
@@ -98,7 +105,8 @@ class Gridgame
       player: Player,
       destination: Destination,
       actor: Actor,
-      blocker: Blocker
+      blocker: Blocker,
+      experience_builder: AttributeBuilder
   }
 
   def add_actors(config)
@@ -108,6 +116,8 @@ class Gridgame
   end
 
   def add_actor(actor_class, key, position)
+    raise "unknown actor type: #{key}" if actor_class.nil?
+
     actor = actor_class.new position
     @actors[key] = actor
     @game_area.add actor

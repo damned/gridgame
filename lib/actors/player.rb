@@ -3,12 +3,16 @@ require_relative '../attributes'
 
 class Player < Actor
   def initialize(position)
-    @attributes = [ Attributes::Experience.new ]
+    @attributes = { experience: Attributes::Experience.new }
     super position
   end
 
   def tick(area)
-    @attributes.each {|a| a.tick area }
+    @attributes.values.each {|a| a.tick area }
+  end
+
+  def increase_attribute(key, amount)
+    attributes[key].increase_by 20
   end
 
   def to_s
@@ -20,6 +24,11 @@ class Player < Actor
   end
 
   def status
-    @attributes.map(&:to_s).join ' '
+    @attributes.values.map(&:to_s).join ' '
   end
+
+  private
+
+  attr_reader :attributes
+
 end

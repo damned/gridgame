@@ -56,6 +56,11 @@ class TestConsole
     self
   end
 
+  def wait
+    simulate_input '.'
+    self
+  end
+
   def down
     simulate_input 'down'
     self

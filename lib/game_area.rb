@@ -42,6 +42,12 @@ class GameArea
     x_ok?(pos.x) && y_ok?(pos.y) && actors_at(pos).all?{|actor_here| actor_here.move_here_ok?(actor)}
   end
 
+  def at?(position)
+    @actors.select {|actor|
+      actor.position == position
+    }
+  end
+
   private
 
   def actors_at(pos)

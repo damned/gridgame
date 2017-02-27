@@ -155,10 +155,24 @@ describe 'gridgame' do
   end
 
   describe 'attributes' do
+    subject(:game) { Gridgame.new(console: console, config: config) }
+
     describe 'experience' do
-      it 'rises over time' do
-        console.right
+      let(:config) { GameConfig.new.with_experience_builder_at(0, 0) }
+
+      it 'player experience increases more when moving over experience builder' do
+        expect(console.game_area).to eq ['+..X.',
+                                         '.....',
+                                         '@....']
+        console.up
         expect(console.player_status).to include '1XP'
+        console.up
+        expect(console.player_status).to include '22XP'
+      end
+
+      it 'no experience boost waiting over builder' do
+        console.up.up.wait
+        expect(console.player_status).to include '23XP'
       end
     end
   end

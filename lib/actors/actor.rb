@@ -1,4 +1,6 @@
 class Actor
+  attr_reader :position
+
   Directions = %i(right down left up)
   def initialize(position)
     @position = position
@@ -31,6 +33,10 @@ class Actor
       @direction_index = (@direction_index + 1) % 4
       direction = Directions[@direction_index]
     end
+  end
+
+  def post_tick(area)
+    #NOP
   end
 
   def to_s

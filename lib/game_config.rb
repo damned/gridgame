@@ -24,6 +24,10 @@ class GameConfig
     place :blocker, x, y
   end
 
+  def with_experience_builder_at(x, y)
+    place :experience_builder, x, y
+  end
+
   def with_player_at(x, y)
     place :player, x, y
   end
