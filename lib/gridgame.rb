@@ -1,4 +1,4 @@
-require_relative 'console'
+require_relative 'ui/console'
 require_relative 'actors'
 require_relative 'game_area'
 require_relative 'config'
@@ -112,6 +112,7 @@ class Gridgame
   end
 
   def do_display
+    # puts "do display, console: #{@console}"
     @console.output @game_area.to_a + [message, status, keys]
   end
 
