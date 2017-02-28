@@ -1,4 +1,4 @@
-require_relative 'position'
+require_relative '../position'
 
 class GameConfig
   attr_reader :width, :height, :positions

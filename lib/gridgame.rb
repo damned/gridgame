@@ -1,7 +1,7 @@
 require_relative 'console'
 require_relative 'actors'
 require_relative 'game_area'
-require_relative 'game_config'
+require_relative 'config'
 
 class Gridgame
   def initialize(console: Console.new, config: GameConfig.new)
