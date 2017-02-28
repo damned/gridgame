@@ -1,4 +1,5 @@
 require 'rspec'
+require_relative '../lib/ui/console'
 require 'gridgame'
 require_relative 'test_console'
 

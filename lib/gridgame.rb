@@ -1,4 +1,3 @@
-require_relative 'ui/console'
 require_relative 'actors'
 require_relative 'game_area'
 require_relative 'config'
