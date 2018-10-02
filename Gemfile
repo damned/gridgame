@@ -1,5 +1,5 @@
-source :rubygems
+source "https://rubygems.org"
 
 gem 'rspec'
 gem 'remedy'
-gem 'rake'
+gem 'rake', '~> 12.3.1'

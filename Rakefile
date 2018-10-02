@@ -1,3 +1,6 @@
+require 'bundler/setup'
+
+task default: ['test']
 
 task 'test' do
   system 'rspec'
