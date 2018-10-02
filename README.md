@@ -7,7 +7,7 @@ it's an example of a few things to do with tdd:
 - how you can use meaningful high level tests to drive right from start
 - how unit tests can arrive a little later as the design gets driven out
 
-so it could be viewed that it should have more unit (class isolation) tests, but this there
+so it could be viewed that it should have more unit (class isolation) tests, but there probably
 would be a shift to more of them as it developed from here... i may take it further and show more of this.
 
 ## how to run
