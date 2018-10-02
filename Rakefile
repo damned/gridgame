@@ -2,15 +2,18 @@ require 'bundler/setup'
 
 task default: ['test']
 
+desc 'run tests'
 task 'test' do
   system 'rspec'
 end
 
+desc 'run in console'
 task 'run' do
   require_relative 'lib/ui/gridgame_console_runner'
   GridgameConsoleRunner.new.run
 end
 
+desc 'run in shoes'
 task 'shoes' do
   check_ruby_for_shoes
   codelines = [
